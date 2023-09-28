@@ -27,6 +27,8 @@ public class SecurityFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         var tokenJwt = recuperarToken(request);
 
+        System.out.println(request);
+
         if (tokenJwt != null) {
             var subject = tokenService.getSubject(tokenJwt);
             var usuario = repository.findByLogin(subject);
